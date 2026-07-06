@@ -1,0 +1,6 @@
+{
+  "name": "Doctor+",
+  "description": "Aplicativo de streaming de Doctor Who Clássico otimizado para dispositivos Android TV e TV Box, com navegação fluida por controle remoto.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

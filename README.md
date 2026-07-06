@@ -142,4 +142,60 @@ Certifique-se de ter o **Node.js** (versão 18+) e o **npm** instalados.
 
 ---
 
+## 📦 Conversão para APK (Android TV & TV Box)
+
+O projeto já vem totalmente pré-configurado com os arquivos necessários para ser transformado em um aplicativo nativo (`.apk`) instalável em Smart TVs e Android TV Boxes.
+
+### 1. Arquivos de Configuração Inclusos
+*   **`config.xml`**: Configurações oficiais do **Cordova** definindo o ID (`com.doctor.plus.tv`), orientação fixada em paisagem (`landscape`), tela cheia (`fullscreen`) e parâmetros de hardware de aceleração para Smart TVs.
+*   **`capacitor.config.json`**: Configurações oficiais do **Capacitor** apontando para o diretório de build web (`dist`) e configurando esquemas estáveis de carregamento de páginas via WebView no Android.
+*   **`android/app/src/main/AndroidManifest.xml`**: Arquivo manifesto do Android especificamente otimizado para TVs:
+    *   Habilita permissões de Internet para o streaming de vídeos.
+    *   Sinaliza `android.hardware.touchscreen` como **não obrigatório** (`android:required="false"`), permitindo que o app seja compatível com controles remotos comuns e listado na Google Play Store para TVs.
+    *   Suporta a categoria `android.intent.category.LEANBACK_LAUNCHER` para aparecer nativamente no carrossel de aplicativos das Smart TVs e Google TV.
+*   **`android/app/build.gradle`**: Configurações de compilação SDK (`minSdkVersion 21` para cobrir 98%+ das Smart TVs e TV Boxes do mercado, e `targetSdkVersion 34` para máxima conformidade com a Google Play Store).
+
+### 2. Passo a Passo para Gerar o APK com Capacitor
+
+Siga os comandos abaixo na raiz do seu projeto para gerar o APK nativo utilizando o Capacitor:
+
+```bash
+# 1. Certifique-se de ter gerado a build de produção web
+npm run build
+
+# 2. Inicialize o projeto Capacitor com as plataformas necessárias (caso faça do zero)
+npx cap init Doctor+ com.doctor.plus.tv --web-dir=dist
+
+# 3. Adicione a plataforma Android ao seu projeto
+npx cap add android
+
+# 4. Copie os arquivos web compilados (/dist) para a pasta do Android nativo
+npx cap copy
+
+# 5. Abra o projeto no Android Studio para compilar e assinar o seu APK final
+npx cap open android
+```
+
+Dentro do **Android Studio**, vá em **Build > Build Bundle(s) / APK(s) > Build APK(s)** e seu arquivo `.apk` estará pronto para ser copiado para um pendrive e instalado na sua TV!
+
+### 3. Passo a Passo para Gerar o APK com Cordova
+
+Se preferir utilizar o Cordova para compilação via CLI rápida:
+
+```bash
+# 1. Instale o Cordova globalmente
+npm install -g cordova
+
+# 2. Adicione a plataforma Android ao projeto Cordova
+cordova platform add android
+
+# 3. Compile diretamente o APK de depuração (Debug)
+cordova build android
+
+# 4. Ou compile o APK otimizado e assinado para produção (Release)
+cordova build android --release
+```
+
+---
+
 Este projeto representa o estado da arte em termos de usabilidade de web apps para Smart TVs, aliando beleza, simplicidade e precisão no controle remoto! 🚀

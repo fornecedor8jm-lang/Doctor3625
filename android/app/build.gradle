@@ -1,0 +1,68 @@
+// Gradle de Configuração do Aplicativo Android (app/build.gradle)
+// Gerado para compilação do APK do Doctor+ para Smart TVs e TV Box
+
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.doctor.plus.tv"
+    compileSdk 34 // Versão SDK do compilador
+
+    defaultConfig {
+        applicationId "com.doctor.plus.tv"
+        
+        // Versões de SDK
+        minSdkVersion 21        // Android 5.0 (Lollipop) - Cobre 98%+ de todas as Smart TVs e TV Boxes ativas
+        targetSdkVersion 34     // Android 14.0 - Recomendado pela Google Play Store
+        
+        // Controle de Builds do App
+        versionCode 210         // Código de build incremental (2.1.0)
+        versionName "2.1.0"     // Nome da versão exibida ao usuário
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Habilita suporte a recursos vetoriais nativos no Android
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true // Ativa otimização e ofuscação de código para deixar o APK leve e rápido na TV
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            
+            // Assinatura de produção (Release)
+            signingConfig signingConfigs.debug // Padrão usa assinatura debug se não especificada
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    // Configurações de empacotamento para evitar colisões de arquivos compilados
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    // Dependências básicas de suporte do Android para WebViews estáveis
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // Core do Capacitor Android para comunicação nativa com o WebView
+    implementation project(':capacitor-android')
+}

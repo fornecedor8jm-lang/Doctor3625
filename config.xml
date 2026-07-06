@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.doctor.plus.tv" version="2.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Doctor+</name>
+    <description>
+        Aplicativo de streaming Doctor+ otimizado para Android TV e Smart TVs.
+    </description>
+    <author email="fornecedor8jm@gmail.com" href="https://ais-pre-mikkfsx6numfya3or4swlf-721732509117.us-east1.run.app">
+        Doctor+ Team
+    </author>
+    <content src="index.html" />
+    
+    <!-- Preferências de Exibição e Dispositivos -->
+    <preference name="Orientation" value="landscape" />
+    <preference name="FullScreen" value="true" />
+    <preference name="BackgroundColor" value="#020617" /> <!-- Slate 950 background color -->
+    <preference name="KeepRunning" value="true" />
+    <preference name="DisallowOverscroll" value="true" />
+    
+    <!-- Configurações para Smart TV / Android TV -->
+    <preference name="AndroidHardwareAcceleration" value="true" />
+    <preference name="android-minSdkVersion" value="21" /> <!-- Android 5.0 LOLLIPOP, compatível com a maioria das TVs -->
+    <preference name="android-targetSdkVersion" value="34" /> <!-- Android 14.0 -->
+    
+    <!-- Definição de Ícones e Splash Screens de Inicialização -->
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon src="assets/icon.png" width="512" height="512" />
+        <splash src="assets/splash.png" />
+        
+        <!-- Habilita suporte para Android TV Leanback Banner -->
+        <preference name="AndroidLaunchMode" value="singleTask" />
+    </platform>
+    
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+</widget>

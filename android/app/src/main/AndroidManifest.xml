@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.doctor.plus.tv">
+
+    <!-- Permissões necessárias para Streaming e API -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- REQUISITO CRÍTICO PARA ANDROID TV / SMART TV:
+         Informa à Google Play Store que a tela sensível ao toque (touchscreen) NÃO é necessária.
+         Isso permite que o aplicativo seja exibido e instalado em Smart TVs e Android TV Boxes. -->
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    
+    <!-- Declara suporte para D-pad / controle remoto de TV -->
+    <uses-feature
+        android:name="android.hardware.keyboard"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.landscape"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Doctor+"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:banner="@drawable/tv_banner"
+        android:hardwareAccelerated="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="Doctor+"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
+            android:screenOrientation="landscape">
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <!-- Categoria padrão para celulares, tablets e TV Boxes comuns -->
+                <category android:name="android.intent.category.LAUNCHER" />
+                
+                <!-- CATEGORIA ESSENCIAL PARA GOOGLE TV / ANDROID TV:
+                     Permite que o aplicativo apareça na tela inicial da TV no carrossel de aplicativos. -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+            
+        </activity>
+    </application>
+
+</manifest>
